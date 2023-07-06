@@ -83,6 +83,21 @@ while len(project_list) > 0 and idx_2 < 20:
     project_list = project_list_2
     project_list_2 = []
 
+for project in project_list:
+    project_pd = pd.concat([project_pd,
+                            pd.DataFrame([{
+                                "project": project,
+                                "raws": 0,
+                                "submissionDate": "NA",
+                                "title": "NA",
+                                "labPIs": "NA",
+                                "instruments": "NA",
+                                "organisms": "NA",
+                                "modifications": "NA",
+                                "references": "NA"
+                            }])],
+                           ignore_index=True)
+
 project_pd.to_csv("pride_projects.tsv", sep="\t", index=False)
 
 print("Done in %.1f s" % (time.time() - start))
