@@ -28,7 +28,7 @@ idx_2 = 0
 
 project_pd = pd.DataFrame(columns=["project", "raws", "submissionDate", "title", "labPIs", "instruments", "organisms", "references"])
 
-while len(project_list) > 0 and idx_2 < 10:
+while len(project_list) > 0 and idx_2 < 20:
     idx_2 += 1
     idx = 0
     print("Round " + str(idx_2))
