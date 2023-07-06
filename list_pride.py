@@ -26,7 +26,7 @@ project_list = ppx.pride.list_projects()
 project_list_2 = []
 idx_2 = 0
 
-project_pd = pd.DataFrame(columns=["project", "raws", "submissionDate", "title", "labPIs", "instruments", "organisms", "references"])
+project_pd = pd.DataFrame(columns=["project", "raws", "submissionDate", "title", "labPIs", "instruments", "organisms", "modifications", "references"])
 
 while len(project_list) > 0 and idx_2 < 20:
     idx_2 += 1
@@ -42,6 +42,7 @@ while len(project_list) > 0 and idx_2 < 20:
             labPIs = ""
             instruments = ""
             organisms = ""
+            modifications = ""
             references = ""
             if "title" in t.metadata:
                 title = t.metadata["title"]
@@ -59,6 +60,12 @@ while len(project_list) > 0 and idx_2 < 20:
                     if "name" in tt:
                         ttt.add(tt["name"])
                 organisms = ";".join(sorted(ttt))
+            if "identifiedPTMStrings" in t.metadata:
+                ttt = set()
+                for tt in t.metadata["identifiedPTMStrings"]:
+                    if "name" in tt:
+                        ttt.add(tt["name"])
+                modifications = ";".join(sorted(ttt))
             if "references" in t.metadata:
                 references = str(t.metadata["references"])
             project_pd = pd.concat([project_pd,
@@ -70,6 +77,7 @@ while len(project_list) > 0 and idx_2 < 20:
                                         "labPIs": labPIs,
                                         "instruments": instruments,
                                         "organisms": organisms,
+                                        "modifications": modifications,
                                         "references": references
                                     }])],
                                    ignore_index=True)
