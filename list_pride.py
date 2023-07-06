@@ -77,6 +77,8 @@ while len(project_list) > 0 and idx_2 < 10:
             print("%s: error" % project)
             print(traceback.format_exc())
             project_list_2.append(project)
+        time.sleep(5)
+    time.sleep(60)
 
     project_list = project_list_2
     project_list_2 = []
